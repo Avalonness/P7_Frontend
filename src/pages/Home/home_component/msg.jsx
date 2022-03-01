@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import colors from '../../../utils/styles/colors'
 import { useState, useEffect } from 'react'
+import { StyledLink } from '../../../utils/styles/atomx.js'
 
 /*****************************************************************************************
  *********************** GESTION DU CSS AVEC SCOPE STYLE COMPONENTS***********************
@@ -95,43 +96,45 @@ function Msg() {
       <main>
         {message.map((el) => {
           return (
-            <ContainerPost key={el.id}>
-              {/* En-tête ici ! */}
-              {profil.map((user, index) => {
-                return el.userId === user.id ? (
-                  <HeaderPost key={index}>
-                    <img src={user.profilImg} alt="Avatar profil" />
-                    <h2>{user.username}</h2>
-                  </HeaderPost>
-                ) : null
-              })}
-              {/* Corps du message ! */}
-              <BodyPost>
-                {el.youtube ? (
-                  <MultiMediaContent>
-                    <iframe
-                      width="450px"
-                      height="280"
-                      src={el.youtube}
-                      title="YouTube video player"
-                      frameborder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowfullscreen
-                    ></iframe>
-                  </MultiMediaContent>
-                ) : null}
+            <StyledLink to={`/post/${el.id}`}>
+              <ContainerPost key={el.id}>
+                {/* En-tête ici ! */}
+                {profil.map((user, index) => {
+                  return el.userId === user.id ? (
+                    <HeaderPost key={index}>
+                      <img src={user.profilImg} alt="Avatar profil" />
+                      <h2>{user.username}</h2>
+                    </HeaderPost>
+                  ) : null
+                })}
+                {/* Corps du message ! */}
+                <BodyPost>
+                  {el.youtube ? (
+                    <MultiMediaContent>
+                      <iframe
+                        width="450px"
+                        height="280"
+                        src={el.youtube}
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                      ></iframe>
+                    </MultiMediaContent>
+                  ) : null}
 
-                {el.contentImg ? (
-                  <MultiMediaContent>
-                    <img src={el.contentImg} alt="Element multumedia" />
-                  </MultiMediaContent>
-                ) : null}
+                  {el.contentImg ? (
+                    <MultiMediaContent>
+                      <img src={el.contentImg} alt="Element multumedia" />
+                    </MultiMediaContent>
+                  ) : null}
 
-                <p>{el.contentText}</p>
-              </BodyPost>
-              {/* Footer du message ! */}
-              <div></div>
-            </ContainerPost>
+                  <p>{el.contentText}</p>
+                </BodyPost>
+                {/* Footer du message ! */}
+                <div></div>
+              </ContainerPost>
+            </StyledLink>
           )
         })}
       </main>

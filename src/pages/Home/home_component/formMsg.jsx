@@ -116,18 +116,21 @@ function FormMsg() {
     e.preventDefault()
 
     const data = new FormData()
-    data.append('file', file[0])
+    data.append('file', file)
+    data.append('youtube', isYoutubeSave)
+    data.append('contentText', isContentSave)
+
+    console.log(isContentSave)
+    console.log(isYoutubeSave)
+    console.log(data)
 
     fetch('http://localhost:8080/createOne', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json;charset=utf-8',
+        'Content-Type': 'multi-part/form-data',
         Authorization: localStorage.getItem('Token_Groupo'),
       },
-      body: JSON.stringify({
-        youtube: isYoutubeSave,
-        contentText: isContentSave,
-      }),
+      body: data,
     })
       .then((response) => response.json())
       .then((data) => console.log(data))
