@@ -116,7 +116,7 @@ function FormMsg() {
     e.preventDefault()
 
     const data = new FormData()
-    data.append('file', file)
+    data.append('image', file)
     data.append('youtube', isYoutubeSave)
     data.append('contentText', isContentSave)
 
@@ -127,7 +127,6 @@ function FormMsg() {
     fetch('http://localhost:8080/createOne', {
       method: 'POST',
       headers: {
-        'Content-Type': 'multi-part/form-data',
         Authorization: localStorage.getItem('Token_Groupo'),
       },
       body: data,
@@ -168,11 +167,7 @@ function FormMsg() {
         {isImage === true ? (
           <MediaOpen>
             <form id="myForm">
-              <input
-                type="file"
-                name="picture"
-                onChange={onInputChange}
-              ></input>
+              <input type="file" name="image" onChange={onInputChange}></input>
             </form>
           </MediaOpen>
         ) : null}
