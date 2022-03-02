@@ -1,7 +1,6 @@
 import styled from 'styled-components'
-import colors from '../../utils/styles/colors'
-import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import MainPost from './mainpost/index.jsx'
+import Comment from './comment/index.jsx'
 
 const PostContainer = styled.div`
   width: 50%;
@@ -10,29 +9,13 @@ const PostContainer = styled.div`
   padding: 10px;
 `
 
-let Post = () => {
-  // let [post, setPost] = useState([])
-  // let [value3, setValue3] = useState('')
-  // let [value4, setValue4] = useState('')
-  // const idUrl = useParams()
-  // const id = idUrl.id
-  // console.log(id)
-
-  // useEffect(() => {
-  //   fetch(`http://localhost:8080/getOne/${id}`, {
-  //     headers: {
-  //       Authorization: localStorage.getItem('Token_Groupo'),
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => setPost(data))
-  // }, [value3])
-
-  // console.log(post)
-
+function Post() {
   return (
     <>
-      <PostContainer>pouet</PostContainer>
+      <PostContainer>
+        <MainPost />
+        <Comment />
+      </PostContainer>
     </>
   )
 }

@@ -135,7 +135,7 @@ function FormMsg() {
       body: data,
     })
       .then((response) => response.json())
-      .then((data) => console.log(data), (window.location = '/home'))
+      .then((data) => console.log(data))
       .catch((err) => {
         console.log(err)
       })
