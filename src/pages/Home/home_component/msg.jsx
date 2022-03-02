@@ -109,7 +109,7 @@ function Msg() {
                 })}
                 {/* Corps du message ! */}
                 <BodyPost>
-                  {el.youtube ? (
+                  {el.youtube !== 'null' ? (
                     <MultiMediaContent>
                       <iframe
                         width="450px"

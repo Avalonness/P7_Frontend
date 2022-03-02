@@ -74,8 +74,8 @@ function FormMsg() {
   let [isYoutube, setIsYoutube] = useState(null)
   let [isImage, setIsImage] = useState(null)
   let [isContentSave, setIsContentSave] = useState(null)
-  let [isYoutubeSave, setIsYoutubeSave] = useState('null')
-  let [file, setFile] = useState('null')
+  let [isYoutubeSave, setIsYoutubeSave] = useState(null)
+  let [file, setFile] = useState(null)
   let [value3, setValue] = useState('')
 
   //Récupérer le profil utilisateur
@@ -93,7 +93,7 @@ function FormMsg() {
   function openYoutube(e) {
     e.preventDefault()
     setIsImage(null)
-    setFile('null')
+    setFile(null)
     setIsYoutube(true)
   }
 
@@ -101,7 +101,7 @@ function FormMsg() {
   function openImage(e) {
     e.preventDefault()
     setIsYoutube(null)
-    setIsYoutubeSave('null')
+    setIsYoutubeSave(null)
     setIsImage(true)
   }
 
@@ -116,7 +116,10 @@ function FormMsg() {
     e.preventDefault()
 
     const data = new FormData()
-    data.append('image', file)
+    console.log(file)
+    if (file) {
+      data.append('image', file)
+    }
     data.append('youtube', isYoutubeSave)
     data.append('contentText', isContentSave)
 
@@ -132,7 +135,7 @@ function FormMsg() {
       body: data,
     })
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => console.log(data), (window.location = '/home'))
       .catch((err) => {
         console.log(err)
       })
