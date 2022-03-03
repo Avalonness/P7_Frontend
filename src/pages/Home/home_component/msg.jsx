@@ -10,6 +10,9 @@ import { StyledLink } from '../../../utils/styles/atomx.js'
 const ContainerPost = styled.div`
   width: 80%;
   margin: auto auto 80px auto;
+  @media (max-width: 767px) {
+    width: 100%;
+    margin-top: 80px;
 `
 
 const HeaderPost = styled.div`
@@ -24,6 +27,9 @@ const HeaderPost = styled.div`
     top: 20px;
     width: 100px;
     height: 100px;
+    @media (max-width: 767px) {
+      top: -30px;
+    }
   }
   & h2 {
     font-size: 20px;
@@ -49,9 +55,16 @@ const BodyPost = styled.div`
 
 const MultiMediaContent = styled.div`
   margin: auto;
+  @media (max-width: 767px) {
+    width: 100%;
+    text-align: center;
+  }
   & img {
     max-width: 450px;
     text-align: center;
+    @media (max-width: 767px) {
+      width: 50%;
+    }
   }
   &:after {
     content: ' ';
@@ -68,18 +81,23 @@ const MultiMediaContent = styled.div`
 function Msg() {
   let [message, setMessage] = useState([])
   let [profil, setProfil] = useState([])
-  let [value, setValue] = useState('')
-  let [value2, setValue2] = useState('')
 
   useEffect(() => {
+    let isMounted = true
+
     fetch('http://localhost:8080/', {
       headers: {
         Authorization: localStorage.getItem('Token_Groupo'),
       },
     })
       .then((res) => res.json())
-      .then((data) => setMessage(data))
-  }, [value])
+      .then((data) => (isMounted === true ? setMessage(data) : null))
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
+  console.log(message)
 
   useEffect(() => {
     fetch('http://localhost:8080/getUsers', {
@@ -89,7 +107,7 @@ function Msg() {
     })
       .then((res) => res.json())
       .then((users) => setProfil(users))
-  }, [value2])
+  }, [])
 
   return (
     <div>
@@ -112,7 +130,7 @@ function Msg() {
                   {el.youtube !== 'null' ? (
                     <MultiMediaContent>
                       <iframe
-                        width="450px"
+                        width="100%"
                         height="280"
                         src={el.youtube}
                         title="YouTube video player"

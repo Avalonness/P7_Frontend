@@ -19,11 +19,18 @@ const FormContainer = styled.div`
     position: absolute;
     left: 40px;
     top: 20px;
+    @media (max-width: 767px) {
+      top: -20px;
+      left: 120px;
+    }
   }
   & textarea {
     border: 1px solid ${colors.backgroundLight};
     padding: 10px;
     margin-top: 75px;
+    @media (max-width: 767px) {
+      width: 100%;
+    }
   }
 `
 
@@ -76,7 +83,6 @@ function FormMsg() {
   let [isContentSave, setIsContentSave] = useState(null)
   let [isYoutubeSave, setIsYoutubeSave] = useState(null)
   let [file, setFile] = useState(null)
-  let [value3, setValue] = useState('')
 
   //Récupérer le profil utilisateur
   useEffect(() => {
@@ -87,7 +93,7 @@ function FormMsg() {
     })
       .then((res) => res.json())
       .then((data) => setprofilLog(data))
-  }, [value3])
+  }, [])
 
   // Gérer l'option youtube
   function openYoutube(e) {

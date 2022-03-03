@@ -6,6 +6,10 @@ import { useParams } from 'react-router-dom'
 const ContainerPost = styled.div`
   width: 80%;
   margin: auto;
+  @media (max-width: 767px) {
+    width: 100%;
+    margin-top: 40px;
+  }
 `
 
 const HeaderPost = styled.div`
@@ -20,6 +24,9 @@ const HeaderPost = styled.div`
     top: 20px;
     width: 100px;
     height: 100px;
+    @media (max-width: 767px) {
+      top: -30px;
+    }
   }
   & h2 {
     font-size: 20px;
@@ -45,9 +52,16 @@ const BodyPost = styled.div`
 
 const MultiMediaContent = styled.div`
   margin: auto;
+  @media (max-width: 767px) {
+    width: 100%;
+    text-align: center;
+  }
   & img {
     max-width: 450px;
     text-align: center;
+    @media (max-width: 767px) {
+      width: 50%;
+    }
   }
   &:after {
     content: ' ';
@@ -60,9 +74,7 @@ const MultiMediaContent = styled.div`
 
 let MainPost = () => {
   let [post, setPost] = useState([])
-  let [value3, setValue3] = useState('')
   let [profile, setProfile] = useState([])
-  let [value4, setValue4] = useState('')
   const idUrl = useParams()
   const id = idUrl.id
 
@@ -74,7 +86,7 @@ let MainPost = () => {
     })
       .then((res) => res.json())
       .then((data) => setPost(data))
-  }, [value3])
+  }, [])
 
   useEffect(() => {
     fetch('http://localhost:8080/getUsers', {
@@ -84,7 +96,7 @@ let MainPost = () => {
     })
       .then((res) => res.json())
       .then((users) => setProfile(users))
-  }, [value4])
+  }, [])
 
   return (
     <>
@@ -103,7 +115,7 @@ let MainPost = () => {
           {post.youtube !== 'null' ? (
             <MultiMediaContent>
               <iframe
-                width="450px"
+                width="100%"
                 height="280"
                 src={post.youtube}
                 title="YouTube video player"

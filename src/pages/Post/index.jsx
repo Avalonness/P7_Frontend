@@ -7,6 +7,9 @@ const PostContainer = styled.div`
   margin: auto;
   background: white;
   padding: 10px;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
 `
 
 function Post() {

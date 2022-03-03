@@ -14,6 +14,9 @@ const ButtonContent = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 20px auto auto auto;
+  @media (max-width: 767px) {
+    width: 40%;
+  }
   & button {
     border: none;
     background: none;
@@ -31,6 +34,9 @@ const BoxLink = styled.div`
   width: 50%;
   padding: 10px;
   margin: 15px auto auto auto;
+  @media (max-width: 767px) {
+    width: 90%;
+  }
   & .link_content {
     background: white;
     padding: 5px;
@@ -41,6 +47,9 @@ const BoxLink = styled.div`
 
 const CommentBox = styled.div`
   margin-bottom: 60px;
+  @media (max-width: 767px) {
+    margin-top: 60px;
+  }
 `
 
 const CommentContainer = styled.div`
@@ -49,6 +58,9 @@ const CommentContainer = styled.div`
   padding: 5px;
   margin: 20px auto;
   width: 70%;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
   & img {
     border: 1px solid ${colors.primary};
   }
@@ -91,22 +103,26 @@ const CommentPost = styled.div`
     position: absolute;
     top: -60px;
     left: 10px;
+    @media (max-width: 767px) {
+      top: -90px;
+      left: 85px;
+    }
   }
   & textarea {
     border: 1px solid ${colors.secondary};
     padding: 20px;
+    @media (max-width: 767px) {
+      width: 100%;
+    }
   }
 `
 
 function Comment() {
   let [comment, setComment] = useState([])
-  let [value5, setValue5] = useState('')
   let [linkOpen, isLinkOpen] = useState(null)
   let [commentOpen, isCommentOpen] = useState(null)
   let [profiles, setProfiles] = useState([])
-  let [value6, setValue6] = useState('')
   let [profileLog, setProfileLog] = useState([])
-  let [value7, setValue7] = useState('')
   let [newComment, setNewComment] = useState(null)
   const idUrl = useParams()
   const id = idUrl.id
@@ -119,7 +135,7 @@ function Comment() {
     })
       .then((res) => res.json())
       .then((data) => setComment(data))
-  }, [value5])
+  }, [])
 
   useEffect(() => {
     fetch('http://localhost:8080/getUsers', {
@@ -129,7 +145,7 @@ function Comment() {
     })
       .then((res) => res.json())
       .then((users) => setProfiles(users))
-  }, [value6])
+  }, [])
 
   //Récupérer le profil utilisateur
   useEffect(() => {
@@ -140,7 +156,7 @@ function Comment() {
     })
       .then((res) => res.json())
       .then((data) => setProfileLog(data))
-  }, [value7])
+  }, [])
 
   function openLink() {
     isCommentOpen(null)

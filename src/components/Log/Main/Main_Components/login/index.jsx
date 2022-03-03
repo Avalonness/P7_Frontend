@@ -13,6 +13,9 @@ const Banner = styled.div`
   width: 35%;
   text-align: center;
   color: white;
+  @media (max-width: 767px) {
+    width: 80%;
+  }
 `
 
 const Formulaire = styled.ul`
@@ -27,6 +30,9 @@ const Formulaire = styled.ul`
       padding: 5px;
       color: white;
       margin-right: 10px;
+      @media (max-width: 767px) {
+        width: 30%;
+      }
     }
     & textarea {
       height: 100%;
@@ -50,6 +56,9 @@ const ButtonValidation = styled.button`
   &:active {
     background: ${colors.primary};
   }
+  @media (max-width: 767px) {
+    width: 30%;
+  }
 `
 
 function Login() {
@@ -66,11 +75,10 @@ function Login() {
       }),
     })
       .then((response) => response.json())
-      .then(
-        (data) =>
-          localStorage.setItem('Token_Groupo', `Bearer ${data.accessToken}`),
-        (window.location = '/home')
+      .then((data) =>
+        localStorage.setItem('Token_Groupo', `Bearer ${data.accessToken}`)
       )
+
       .catch((err) => {
         console.log(err)
       })

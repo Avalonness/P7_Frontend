@@ -9,6 +9,9 @@ const MainContainer = styled.div`
   margin: 0 auto;
   background: white;
   position: relative;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
 `
 
 const ModeSelect = styled.div`
@@ -18,6 +21,10 @@ const ModeSelect = styled.div`
   padding: 15px;
   top: 100px;
   left: 80px;
+  @media (max-width: 767px) {
+    top: 500px;
+    left: 95px;
+  }
 `
 
 const SelectButton = styled.button`
