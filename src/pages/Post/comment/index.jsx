@@ -3,12 +3,11 @@ import colors from '../../../utils/styles/colors'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { faMessage } from '@fortawesome/free-solid-svg-icons'
 import { faLink } from '@fortawesome/free-solid-svg-icons'
 
 const ButtonContent = styled.div`
-  width: 15%;
+  width: 10%;
   padding: 10px;
   background: ${colors.backgroundLight};
   display: flex;
@@ -193,12 +192,10 @@ function Comment() {
     <>
       {/* Menu Button */}
       <ButtonContent>
-        <button>
-          <FontAwesomeIcon icon={faHeart} />
-        </button>
         <button onClick={openComment}>
           <FontAwesomeIcon icon={faMessage} />
         </button>
+        <div>•</div>
         <button onClick={openLink}>
           <FontAwesomeIcon icon={faLink} />
         </button>

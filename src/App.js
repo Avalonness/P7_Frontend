@@ -5,7 +5,6 @@ import Log from './components/Log/Log'
 import StyleGlobal from './utils/styles/StyleGlobal'
 import Footer from './components/Footer/index.jsx'
 import Home from './pages/Home/index.jsx'
-import Header from './components/Header'
 import Post from './pages/Post/index.jsx'
 
 function App() {
@@ -13,8 +12,6 @@ function App() {
     <>
       <Router>
         <StyleGlobal />
-        <Header />
-
         <Routes>
           <Route path="/" element={<Log />} />
           <Route path="/home" element={<Home />} />

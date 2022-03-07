@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import MainPost from './mainpost/index.jsx'
 import Comment from './comment/index.jsx'
+import Header from '../../components/Header'
 
 const PostContainer = styled.div`
   width: 50%;
@@ -15,6 +16,7 @@ const PostContainer = styled.div`
 function Post() {
   return (
     <>
+      <Header />
       <PostContainer>
         <MainPost />
         <Comment />

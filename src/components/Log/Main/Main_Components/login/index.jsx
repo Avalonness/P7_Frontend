@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import colors from '../../../../../utils/styles/colors'
+import { useState } from 'react'
 
 const Container = styled.div`
   padding: 25px;
@@ -60,8 +61,24 @@ const ButtonValidation = styled.button`
     width: 30%;
   }
 `
+const AuthContent = styled.div`
+  text-align: center;
+  color: green;
+  font-size: 18px;
+  & button {
+    background: ${colors.primary};
+    border: none;
+    padding: 5px;
+    color: white;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 15px;
+  }
+`
 
 function Login() {
+  const token = localStorage.getItem('Token_Groupo')
+
   function logUser() {
     fetch('http://localhost:8080/login', {
       method: 'POST',
@@ -78,41 +95,57 @@ function Login() {
       .then((data) =>
         localStorage.setItem('Token_Groupo', `Bearer ${data.accessToken}`)
       )
-
       .catch((err) => {
         console.log(err)
       })
+    setTimeout(function () {
+      window.location.href = 'http://localhost:3000/home'
+    }, 2500)
   }
+
+  function redirect() {
+    document.location.href = 'http://localhost:3000/home'
+  }
+
   return (
     <Container>
       <Banner>Connexion</Banner>
-      <Formulaire>
-        <li>
-          <div>Email</div>
-          <form>
-            <InputForm
-              type="text"
-              id="logemail"
-              name="email"
-              required
-              placeholder="Email ..."
-            />
-          </form>
-        </li>
-        <li>
-          <div>Password</div>
-          <form>
-            <InputForm
-              type="password"
-              id="logpassword"
-              name="password"
-              required
-              placeholder="Password ..."
-            />
-          </form>
-        </li>
-      </Formulaire>
-      <ButtonValidation onClick={() => logUser()}>Valider</ButtonValidation>
+      {token ? (
+        <AuthContent>
+          <p>Vous êtes authentifié !</p>
+          <button onClick={() => redirect()}>Page d'Accueil</button>
+        </AuthContent>
+      ) : (
+        <Formulaire>
+          <li>
+            <div>Email</div>
+            <form>
+              <InputForm
+                type="text"
+                id="logemail"
+                name="email"
+                required
+                placeholder="Email ..."
+              />
+            </form>
+          </li>
+          <li>
+            <div>Password</div>
+            <form>
+              <InputForm
+                type="password"
+                id="logpassword"
+                name="password"
+                required
+                placeholder="Password ..."
+              />
+            </form>
+          </li>
+        </Formulaire>
+      )}
+      {token ? null : (
+        <ButtonValidation onClick={() => logUser()}>Valider</ButtonValidation>
+      )}
     </Container>
   )
 }

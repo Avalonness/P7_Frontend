@@ -3,7 +3,7 @@ import Signup from './Main_Components/signup/index'
 import Login from './Main_Components/login/index'
 import { useState } from 'react'
 import colors from '../../../utils/styles/colors'
-
+import HeaderLog from './Main_Components/header/index'
 const MainContainer = styled.div`
   width: 50%;
   margin: 0 auto;
@@ -57,28 +57,31 @@ function Main() {
   }
 
   return (
-    <main>
-      <ModeSelect>
-        {isLog === null ? (
-          <SelectButtonActive onClick={() => onClickLog()}>
-            Connexion
-          </SelectButtonActive>
-        ) : (
-          <SelectButton onClick={() => onClickLog()}>Connexion</SelectButton>
-        )}
-        {isLog === null ? (
-          <SelectButton onClick={() => onClickSign()}>
-            S'enregistrer
-          </SelectButton>
-        ) : (
-          <SelectButtonActive onClick={() => onClickSign()}>
-            S'enregistrer
-          </SelectButtonActive>
-        )}
-      </ModeSelect>
+    <>
+      <HeaderLog />
+      <main>
+        <ModeSelect>
+          {isLog === null ? (
+            <SelectButtonActive onClick={() => onClickLog()}>
+              Connexion
+            </SelectButtonActive>
+          ) : (
+            <SelectButton onClick={() => onClickLog()}>Connexion</SelectButton>
+          )}
+          {isLog === null ? (
+            <SelectButton onClick={() => onClickSign()}>
+              S'enregistrer
+            </SelectButton>
+          ) : (
+            <SelectButtonActive onClick={() => onClickSign()}>
+              S'enregistrer
+            </SelectButtonActive>
+          )}
+        </ModeSelect>
 
-      <MainContainer>{isLog === null ? <Login /> : <Signup />}</MainContainer>
-    </main>
+        <MainContainer>{isLog === null ? <Login /> : <Signup />}</MainContainer>
+      </main>
+    </>
   )
 }
 

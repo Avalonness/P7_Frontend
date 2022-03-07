@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import Msg from './home_component/msg'
 import FormMsg from './home_component/formMsg'
+import Header from '../../components/Header'
 
 const HomeContainer = styled.div`
   width: 50%;
@@ -15,6 +16,7 @@ const HomeContainer = styled.div`
 function Home() {
   return (
     <>
+      <Header />
       <HomeContainer>
         <FormMsg />
         <Msg />
