@@ -81,6 +81,7 @@ const MultiMediaContent = styled.div`
 function Msg() {
   let [message, setMessage] = useState([])
   let [profil, setProfil] = useState([])
+  let [profileLog, setProfileLog] = useState([])
 
   useEffect(() => {
     let isMounted = true
@@ -91,7 +92,7 @@ function Msg() {
       },
     })
       .then((res) => res.json())
-      .then((data) => (isMounted === true ? setMessage(data) : null))
+      .then((data) => (isMounted === true ? setMessage(data.reverse()) : null))
     return () => {
       isMounted = false
     }

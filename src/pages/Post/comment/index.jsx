@@ -55,13 +55,14 @@ const CommentContainer = styled.div`
   display: flex;
   background: ${colors.backgroundLight};
   padding: 5px;
-  margin: 20px auto;
+  margin: 20px auto auto auto;
   width: 70%;
   @media (max-width: 767px) {
     width: 100%;
   }
   & img {
     border: 1px solid ${colors.primary};
+    width: 100px;
   }
   & .comment_username {
     background: ${colors.primary};
@@ -73,6 +74,7 @@ const CommentContainer = styled.div`
   }
   & .comment_message {
     padding: 5px;
+    width: 100%;
   }
 `
 
@@ -102,6 +104,7 @@ const CommentPost = styled.div`
     position: absolute;
     top: -60px;
     left: 10px;
+    width: 100px;
     @media (max-width: 767px) {
       top: -90px;
       left: 85px;
@@ -232,26 +235,30 @@ function Comment() {
         ) : null}
         {comment.map((message) => {
           return commentOpen !== null ? (
-            <CommentContainer>
-              {/* Récupération des commentaires */}
-              <div>
-                {profiles.map((profil) => {
-                  return profil.id === message.userId ? (
-                    <img src={profil.profilImg} alt="Avatar profil" />
-                  ) : null
-                })}
-              </div>
-              <div>
+            <>
+              <CommentContainer>
+                {/* Récupération des commentaires */}
                 <div>
-                  {profiles.map((profile) => {
-                    return profile.id === message.userId ? (
-                      <div className="comment_username">{profile.username}</div>
+                  {profiles.map((profil) => {
+                    return profil.id === message.userId ? (
+                      <img src={profil.profilImg} alt="Avatar profil" />
                     ) : null
                   })}
                 </div>
-                <div className="comment_message">{message.content}</div>
-              </div>
-            </CommentContainer>
+                <div>
+                  <div>
+                    {profiles.map((profile) => {
+                      return profile.id === message.userId ? (
+                        <div className="comment_username">
+                          {profile.username}
+                        </div>
+                      ) : null
+                    })}
+                  </div>
+                  <div className="comment_message">{message.content}</div>
+                </div>
+              </CommentContainer>
+            </>
           ) : null
         })}
       </CommentBox>

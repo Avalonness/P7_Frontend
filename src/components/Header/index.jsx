@@ -33,10 +33,16 @@ const MenuContent = styled.div`
   color: white;
   width: 10%;
   padding: 10px;
+  @media (max-width: 767px) {
+    width: 50%;
+    position: sticky;
+    margin: auto;
+  }
   & img {
     border-radius: 50%;
     border: 1px solid ${colors.secondary};
     margin-top: 20px;
+    height: 100px;
   }
   & .menu_list {
     margin-top: 25px;
@@ -98,7 +104,9 @@ function Header() {
             {/* Contenu du menu */}
             <MenuContent>
               <div>
-                <img src={profileLog.profilImg} alt="Profil Connecté" />
+                {profileLog.profilImg ? (
+                  <img src={profileLog.profilImg} alt="Profil Connecté" />
+                ) : null}
               </div>
               <div className="menu_list">
                 <ul>
@@ -108,7 +116,9 @@ function Header() {
                     </StyledLink>
                   </li>
                   <li>
-                    <button>Profil</button>
+                    <StyledLink to={`/profil/${profileLog.id}`}>
+                      <button>Profil</button>
+                    </StyledLink>
                   </li>
                   <li>
                     <button className="button_logout" onClick={logout}>

@@ -19,6 +19,7 @@ const FormContainer = styled.div`
     position: absolute;
     left: 40px;
     top: 20px;
+    width: 100px;
     @media (max-width: 767px) {
       top: -20px;
       left: 120px;
@@ -145,6 +146,9 @@ function FormMsg() {
       .catch((err) => {
         console.log(err)
       })
+    setTimeout(function () {
+      window.location.href = 'http://localhost:3000/home'
+    }, 500)
   }
 
   return (

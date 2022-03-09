@@ -6,6 +6,7 @@ import StyleGlobal from './utils/styles/StyleGlobal'
 import Footer from './components/Footer/index.jsx'
 import Home from './pages/Home/index.jsx'
 import Post from './pages/Post/index.jsx'
+import Profil from './pages/Profil/index.jsx'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Log />} />
           <Route path="/home" element={<Home />} />
           <Route path="/post/:id" element={<Post />} />
+          <Route path="/profil/:id" element={<Profil />} />
         </Routes>
 
         <Footer />

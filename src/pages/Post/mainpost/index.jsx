@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import colors from '../../../utils/styles/colors'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { StyledLink } from '../../../utils/styles/atomx.js'
 
 const ContainerPost = styled.div`
   width: 80%;
@@ -72,9 +73,21 @@ const MultiMediaContent = styled.div`
   }
 `
 
+const ModerationContent = styled.div`
+  display: flex;
+  justify-content: end;
+  & button {
+    padding: 5px;
+    background: ${colors.secondary};
+    color: white;
+    border: none;
+  }
+`
+
 let MainPost = () => {
   let [post, setPost] = useState([])
   let [profile, setProfile] = useState([])
+  let [profileLog, setProfileLog] = useState([])
   const idUrl = useParams()
   const id = idUrl.id
 
@@ -98,6 +111,32 @@ let MainPost = () => {
       .then((users) => setProfile(users))
   }, [])
 
+  //Récupérer le profil utilisateur
+  useEffect(() => {
+    fetch('http://localhost:8080/getUserOne', {
+      headers: {
+        Authorization: localStorage.getItem('Token_Groupo'),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setProfileLog(data))
+  }, [])
+
+  // Supprimer un élément !
+  function deleteMessage() {
+    fetch(`http://localhost:8080/deleteOne/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: localStorage.getItem('Token_Groupo'),
+      },
+    })
+      .then((res) => res.text()) // or res.json()
+      .then((res) => console.log(res))
+    setTimeout(function () {
+      window.location.href = 'http://localhost:3000/home'
+    }, 500)
+  }
+
   return (
     <>
       <ContainerPost key={post.id}>
@@ -105,7 +144,9 @@ let MainPost = () => {
         {profile.map((user, index) => {
           return post.userId === user.id ? (
             <HeaderPost key={index}>
-              <img src={user.profilImg} alt="Avatar profil" />
+              <StyledLink to={`/profil/${post.userId}`}>
+                <img src={user.profilImg} alt="Avatar profil" />
+              </StyledLink>
               <h2>{user.username}</h2>
             </HeaderPost>
           ) : null
@@ -135,7 +176,13 @@ let MainPost = () => {
           <p>{post.contentText}</p>
         </BodyPost>
         {/* Footer du message ! */}
-        <div></div>
+        <div>
+          {profileLog.id === post.userId || profileLog.levelAccount === 1 ? (
+            <ModerationContent>
+              <button onClick={deleteMessage}>Supprimer</button>
+            </ModerationContent>
+          ) : null}
+        </div>
       </ContainerPost>
     </>
   )
